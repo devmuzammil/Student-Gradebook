@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+     
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #343a40;
+            padding-top: 50px;
+            color: white;
+            z-index: 1;
+        }
+
+        .sidebar-item {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            padding-top: 70px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Admin Dashboard</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-item">
+            <a class="nav-link" href="admindashboard.php">Dashboard</a>
+        </div>
+        <div class="sidebar-item">
+            <a class="nav-link" href="add-user.html">Add User </a>
+        </div>
+        <div class="sidebar-item">
+            <a class="nav-link" href="./users.html">Users</a>
+        </div>
+        <div class="sidebar-item">
+            <a class="nav-link" href="add-course.php">Add Courses</a>
+        </div>
+        <div class="sidebar-item">
+            <a class="nav-link" href="assign-courses.php">Assign Courses</a>
+        </div>
+       
+    </div>
+
+     <!-- Main content -->
+     <div class="main-content">
+        <section class="container mt-5">
+            <h2 class="fw-bold">Add User</h2>
+            <form id="userForm" action="add-user.php" method="post">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <select name="role" class="form-control bg-light shadow-sm border-dark" id="role" required>
+                            <option value="" selected disabled>-- Select Role --</option>
+                            <option value="student">Student</option>
+                            <option value="faculty">Faculty</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" id="dynamicFields">
+                    <!-- Dynamic fields will be inserted here -->
+                </div>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary">Add User</button>
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        document.getElementById('role').addEventListener('change', function () {
+            var role = this.value;
+            var dynamicFields = document.getElementById('dynamicFields');
+            dynamicFields.innerHTML = ''; // Clear existing fields
+
+            if (role === 'student') {
+                dynamicFields.innerHTML = `
+                   
+                    <div class="col-md-4 mb-3">
+                        <input type="text" class="form-control bg-light shadow-sm border-dark" placeholder="Full Name" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input type="email" class="form-control bg-light shadow-sm border-dark" placeholder="Email" id="email" name="email" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input type="password" class="form-control bg-light shadow-sm border-dark" placeholder="Password" id="password" name="password" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input type="text" class="form-control bg-light shadow-sm border-dark" placeholder="Student ID" id="studentId" name="studentId" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input type="text" class="form-control bg-light shadow-sm border-dark" placeholder="Major" id="major" name="major" required>
+                    </div>
+                `;
+            } else if (role === 'faculty') {
+                dynamicFields.innerHTML = `
+                    <div class="col-md-4 mb-3">
+                        <input type="text" class="form-control bg-light shadow-sm border-dark" placeholder="Full Name" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input type="email" class="form-control bg-light shadow-sm border-dark" placeholder="Email" id="email" name="email" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input type="password" class="form-control bg-light shadow-sm border-dark" placeholder="Password" id="password" name="password" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input type="text" class="form-control bg-light shadow-sm border-dark" placeholder="Faculty ID" id="facultyId" name="facultyId" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input type="text" class="form-control bg-light shadow-sm border-dark" placeholder="Department" id="department" name="department" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input type="tel" class="form-control bg-light shadow-sm border-dark" placeholder="Contact No" id="Contact_No" name="Contact_No" required>
+                    </div>
+                `;
+            } else if (role === 'admin') {
+                dynamicFields.innerHTML = `
+                    <div class="col-md-4 mb-3">
+                        <input type="text" class="form-control bg-light shadow-sm border-dark" placeholder="Full Name" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input type="email" class="form-control bg-light shadow-sm border-dark" placeholder="Email" id="email" name="email" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input type="password" class="form-control bg-light shadow-sm border-dark" placeholder="Password" id="password" name="password" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <input type="text" class="form-control bg-light shadow-sm border-dark" placeholder="Admin Code" id="adminCode" name="adminCode" required>
+                    </div>
+                `;
+            }
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

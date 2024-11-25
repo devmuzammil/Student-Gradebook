@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add your custom CSS styles here */
+        /* Custom styles for the sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 250px;
+            background-color: #343a40;
+            padding-top: 50px;
+            color: white;
+            z-index: 1; /* Ensure the sidebar is above other elements */
+        }
+
+        .sidebar-item {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Adjust main content to make space for the sidebar */
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            padding-top: 70px; /* Adjust padding top to make space for the header */
+        }
+
+        /* Ensure the header stays on top of other elements */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Faculty Dashboard</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-item">
+            <a class="nav-link" href="#">Dashboard</a>
+        </div>
+        <div class="sidebar-item">
+            <a class="nav-link" href="#">Courses</a>
+        </div>
+        <div class="sidebar-item">
+            <a class="nav-link" href="#">Students</a>
+        </div>
+        <div class="sidebar-item">
+            <a class="nav-link" href="#">Grades</a>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+        <section class="container mt-5">
+            <h2>Welcome, Faculty</h2>
+            <!-- Faculty specific content goes here -->
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Your Courses</h3>
+                    <ul>
+                        <li>Course 1</li>
+                        <li>Course 2</li>
+                        <li>Course 3</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h3>Your Students</h3>
+                    <ul>
+                        <li>Student 1</li>
+                        <li>Student 2</li>
+                        <li>Student 3</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

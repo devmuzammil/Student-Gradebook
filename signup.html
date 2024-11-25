@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - Student Gradebook</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body, html {
+    height: 100%;
+    background-image: url(./images.jpg);
+    background-size: cover;
+}
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 10px 10px 0 0;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .form-section {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Student Gradebook</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="homepage.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="signin.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="signup.html">Signup</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="mb-0 text-center">Signup</h3>
+                    </div>
+                    <div class="card-body">
+                        <form action="signup.php" method="POST" novalidate>
+                            <div class="form-group">
+                                <label for="fullName">Full Name</label>
+                                <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter full name" required>
+                                <div class="invalid-feedback">Please enter your full name.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                                <div class="invalid-feedback">Please enter a valid email.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                <div class="invalid-feedback">Please enter your password.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="userType">Role</label>
+                                <select class="form-control" id="userType" name="userType" required>
+                                    <option value="">Select</option>
+                                    <option value="student">Student</option>
+                                    <option value="faculty">Faculty</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                                <div class="invalid-feedback">Please select a user type.</div>
+                            </div>
+
+                            <!-- Student specific fields -->
+                            <div id="studentFields" class="form-section">
+                                <div class="form-group">
+                                    <label for="studentId">Student ID</label>
+                                    <input type="text" class="form-control" id="studentId" name="studentId" placeholder="Enter student ID">
+                                    <div class="invalid-feedback">Please enter your student ID.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="major">Major</label>
+                                    <input type="text" class="form-control" id="major" name="major" placeholder="Enter your major">
+                                    <div class="invalid-feedback">Please enter your major.</div>
+                                </div>
+                            </div>
+
+                            <!-- Faculty specific fields -->
+                            <div id="facultyFields" class="form-section">
+                                <div class="form-group">
+                                    <label for="facultyId">Faculty ID</label>
+                                    <input type="text" class="form-control" id="facultyId" name="facultyId" placeholder="Enter faculty ID">
+                                    <div class="invalid-feedback">Please enter your faculty ID.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="department">Department</label>
+                                    <input type="text" class="form-control" id="department" name="department" placeholder="Enter your department">
+                                    <div class="invalid-feedback">Please enter your department.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="facultyId">Contact Number</label>
+                                    <input type="text" class="form-control" id="Contact_No" name="Contact_No" placeholder="Enter Contact Number">
+                                    <div class="invalid-feedback">Please enter your contact number.</div>
+                                </div>
+                            </div>
+
+                            <!-- Admin specific fields -->
+                            <div id="adminFields" class="form-section">
+                                <div class="form-group">
+                                    <label for="adminCode">Admin Code</label>
+                                    <input type="text" class="form-control" id="adminCode" name="adminCode" placeholder="Enter admin code">
+                                    <div class="invalid-feedback">Please enter the admin code.</div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block" >Signup</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#userType').on('change', function() {
+                var selectedRole = $(this).val();
+                $('.form-section').hide();
+                if (selectedRole === 'student') {
+                    $('#studentFields').show();
+                } else if (selectedRole === 'faculty') {
+                    $('#facultyFields').show();
+                } else if (selectedRole === 'admin') {
+                    $('#adminFields').show();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
